@@ -22,6 +22,13 @@ refresh-token rotation, and role-based access control — built with **Spring Bo
 
 ---
 
+## 📖 About
+
+AuthApp is a production-ready, full-stack authentication system that combines JWT-based security, OAuth2 social login, and refresh-token rotation into a single, easy-to-deploy solution.
+Built with Spring Boot 3 and React 19, it provides a modern glassmorphism UI with role-based access control and secure HTTP-only cookie handling out of the box.
+
+---
+
 ## ✨ Features
 
 | Category | Details |
