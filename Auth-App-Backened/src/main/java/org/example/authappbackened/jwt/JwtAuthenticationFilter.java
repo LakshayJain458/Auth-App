@@ -54,26 +54,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String token = extractToken(authorizationHeader);
 
         try {
-            if (!jwtService.isAccessToken(token)) {
+            if (jwtService.isAccessToken(token)) {
+                authenticateUser(token, request);
+            } else {
                 log.debug("Token is not an access token, skipping authentication");
-                filterChain.doFilter(request, response);
-                return;
             }
-
-            authenticateUser(token, request);
-
         } catch (ExpiredJwtException e) {
             log.warn("JWT token has expired: {}", e.getMessage());
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
         } catch (JwtException e) {
-            log.error("Invalid JWT token: {}", e.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            log.warn("Invalid JWT token: {}", e.getMessage());
         } catch (Exception e) {
-            log.error("Unexpected error during JWT authentication: {}", e.getMessage(), e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
+            log.warn("JWT authentication failed: {}", e.getMessage());
         }
 
         filterChain.doFilter(request, response);

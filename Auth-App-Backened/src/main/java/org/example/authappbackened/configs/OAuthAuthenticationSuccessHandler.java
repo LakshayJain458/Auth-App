@@ -12,6 +12,7 @@ import org.example.authappbackened.jwt.CookieService;
 import org.example.authappbackened.jwt.JwtService;
 import org.example.authappbackened.repositories.RefreshTokenRepo;
 import org.example.authappbackened.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -19,6 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -32,9 +35,13 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
     private final RefreshTokenRepo refreshTokenRepo;
     private final CookieService cookieService;
 
+    @Value("${app.frontend.url:http://localhost:5173}")
+    private String frontendUrl;
+
     @Override
     @Transactional
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
         var user = getUser(authentication);
 
         User currUser = userRepo.findByEmail(user.getEmail());
@@ -59,8 +66,10 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
         String refreshToken = jwtService.generateRefreshToken(currUser, refreshTokenDb.getJwtId());
         cookieService.attachRefreshTokenCookie(response, refreshToken, (int) jwtService.getRefreshTtlSeconds());
 
-        response.setContentType("text/plain");
-        response.getWriter().write("Login successful. Access Token: " + accessToken);
+        // Redirect to frontend with access token
+        String redirectUrl = frontendUrl + "/oauth/callback?token="
+                + URLEncoder.encode(accessToken, StandardCharsets.UTF_8);
+        response.sendRedirect(redirectUrl);
     }
 
     private static User getUser(Authentication authentication) {
@@ -84,7 +93,8 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
                 email = oauth.getAttribute("login") + "@github.com";
             }
             user.setEmail(email);
-            user.setUsername(oauth.getAttribute("name") != null ? oauth.getAttribute("name") : oauth.getAttribute("login"));
+            user.setUsername(
+                    oauth.getAttribute("name") != null ? oauth.getAttribute("name") : oauth.getAttribute("login"));
             user.setProvider(Provider.GITHUB);
             user.setProviderId(Objects.requireNonNull(oauth.getAttribute("id")).toString());
             user.setImage(oauth.getAttribute("avatar_url"));

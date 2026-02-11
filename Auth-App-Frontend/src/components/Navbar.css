@@ -1,0 +1,190 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    z-index: 100;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    transition: background var(--transition-normal), border-color var(--transition-normal);
+}
+
+.navbar__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.navbar__logo-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+.navbar__logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* Actions */
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* User Chip */
+.navbar__user-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 6px;
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.navbar__user-chip:hover {
+    border-color: var(--surface-border-hover);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.navbar__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navbar__username {
+    font-size: 13px;
+    font-weight: 600;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Logout */
+.navbar__logout {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1.5px solid var(--surface-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition:
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+}
+
+.navbar__logout:hover {
+    color: var(--error);
+    border-color: var(--error);
+    background: var(--error-bg);
+}
+
+/* Auth links (for guests) */
+.navbar__auth-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--surface-border);
+    background: transparent;
+    transition:
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.navbar__auth-link:hover {
+    color: var(--text-primary);
+    border-color: var(--surface-border-hover);
+    background: var(--surface);
+    transform: translateY(-1px);
+}
+
+.navbar__auth-link--primary {
+    background: var(--gradient-primary);
+    color: var(--text-on-primary);
+    border-color: transparent;
+    box-shadow: none;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.navbar__auth-link--primary:hover {
+    color: var(--text-on-primary);
+    border-color: transparent;
+    background: var(--gradient-primary);
+    box-shadow: 0 2px 12px var(--primary-glow);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .navbar__username {
+        display: none;
+    }
+
+    .navbar__inner {
+        padding: 0 16px;
+    }
+
+    .navbar__auth-link span {
+        display: none;
+    }
+
+    .navbar__auth-link {
+        padding: 8px 12px;
+    }
+}

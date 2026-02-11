@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ============================================
+   DESIGN TOKENS — LIGHT MODE (default)
+   ============================================ */
+:root {
+  /* Primary palette */
+  --primary-hue: 250;
+  --primary: hsl(var(--primary-hue), 85%, 60%);
+  --primary-light: hsl(var(--primary-hue), 85%, 72%);
+  --primary-dark: hsl(var(--primary-hue), 85%, 48%);
+  --primary-glow: hsla(var(--primary-hue), 85%, 60%, 0.4);
+
+  /* Accent */
+  --accent: hsl(330, 85%, 60%);
+  --accent-light: hsl(330, 85%, 72%);
+  --accent-glow: hsla(330, 85%, 60%, 0.35);
+
+  /* Gradient */
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
+  --gradient-bg: linear-gradient(135deg, hsl(240, 30%, 96%), hsl(280, 30%, 96%), hsl(330, 20%, 96%));
+  --gradient-mesh: radial-gradient(ellipse at 20% 50%, hsla(var(--primary-hue), 60%, 70%, 0.15) 0%, transparent 50%),
+                   radial-gradient(ellipse at 80% 20%, hsla(330, 60%, 70%, 0.12) 0%, transparent 50%),
+                   radial-gradient(ellipse at 50% 80%, hsla(200, 60%, 70%, 0.1) 0%, transparent 50%);
+
+  /* Surfaces */
+  --bg: hsl(240, 20%, 97%);
+  --surface: hsla(0, 0%, 100%, 0.7);
+  --surface-solid: hsl(0, 0%, 100%);
+  --surface-hover: hsla(0, 0%, 100%, 0.85);
+  --surface-border: hsla(var(--primary-hue), 30%, 70%, 0.25);
+  --surface-border-hover: hsla(var(--primary-hue), 60%, 60%, 0.5);
+
+  /* Glass */
+  --glass-bg: hsla(0, 0%, 100%, 0.55);
+  --glass-border: hsla(0, 0%, 100%, 0.6);
+  --glass-shadow: 0 8px 32px hsla(var(--primary-hue), 30%, 40%, 0.08);
+  --glass-blur: 20px;
+
+  /* Text */
+  --text-primary: hsl(240, 20%, 15%);
+  --text-secondary: hsl(240, 10%, 40%);
+  --text-muted: hsl(240, 8%, 55%);
+  --text-on-primary: hsl(0, 0%, 100%);
+  --text-link: var(--primary);
+
+  /* Input */
+  --input-bg: hsla(0, 0%, 100%, 0.6);
+  --input-border: hsla(240, 20%, 70%, 0.35);
+  --input-focus-border: var(--primary);
+  --input-focus-glow: var(--primary-glow);
+
+  /* Misc */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 2px 8px hsla(0, 0%, 0%, 0.04);
+  --shadow-md: 0 4px 20px hsla(0, 0%, 0%, 0.06);
+  --shadow-lg: 0 12px 40px hsla(0, 0%, 0%, 0.1);
+  --shadow-glow: 0 0 30px var(--primary-glow);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Navbar */
+  --navbar-height: 72px;
+
+  /* Status */
+  --success: hsl(150, 70%, 42%);
+  --error: hsl(0, 75%, 55%);
+  --warning: hsl(40, 90%, 50%);
+  --error-bg: hsla(0, 75%, 55%, 0.1);
+  --success-bg: hsla(150, 70%, 42%, 0.1);
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+[data-theme="dark"] {
+  --primary: hsl(var(--primary-hue), 80%, 68%);
+  --primary-light: hsl(var(--primary-hue), 80%, 78%);
+  --primary-dark: hsl(var(--primary-hue), 80%, 55%);
+  --primary-glow: hsla(var(--primary-hue), 80%, 60%, 0.35);
+
+  --accent: hsl(330, 80%, 68%);
+  --accent-light: hsl(330, 80%, 78%);
+  --accent-glow: hsla(330, 80%, 65%, 0.3);
+
+  --gradient-bg: linear-gradient(135deg, hsl(240, 20%, 8%), hsl(260, 20%, 10%), hsl(280, 15%, 9%));
+  --gradient-mesh: radial-gradient(ellipse at 20% 50%, hsla(var(--primary-hue), 50%, 40%, 0.12) 0%, transparent 50%),
+                   radial-gradient(ellipse at 80% 20%, hsla(330, 50%, 40%, 0.1) 0%, transparent 50%),
+                   radial-gradient(ellipse at 50% 80%, hsla(200, 50%, 40%, 0.08) 0%, transparent 50%);
+
+  --bg: hsl(240, 20%, 7%);
+  --surface: hsla(240, 15%, 15%, 0.65);
+  --surface-solid: hsl(240, 15%, 13%);
+  --surface-hover: hsla(240, 15%, 18%, 0.8);
+  --surface-border: hsla(var(--primary-hue), 20%, 40%, 0.25);
+  --surface-border-hover: hsla(var(--primary-hue), 50%, 55%, 0.45);
+
+  --glass-bg: hsla(240, 15%, 14%, 0.6);
+  --glass-border: hsla(0, 0%, 100%, 0.08);
+  --glass-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+
+  --text-primary: hsl(0, 0%, 95%);
+  --text-secondary: hsl(240, 10%, 70%);
+  --text-muted: hsl(240, 8%, 50%);
+
+  --input-bg: hsla(240, 15%, 16%, 0.7);
+  --input-border: hsla(240, 15%, 35%, 0.4);
+
+  --shadow-sm: 0 2px 8px hsla(0, 0%, 0%, 0.2);
+  --shadow-md: 0 4px 20px hsla(0, 0%, 0%, 0.25);
+  --shadow-lg: 0 12px 40px hsla(0, 0%, 0%, 0.35);
+
+  --error-bg: hsla(0, 75%, 55%, 0.15);
+  --success-bg: hsla(150, 70%, 42%, 0.15);
+}
+
+/* ============================================
+   GLOBAL RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(-20px) rotateX(5deg) rotateY(5deg); }
+  50% { transform: translateY(-10px) rotateX(-3deg) rotateY(-3deg); }
+  75% { transform: translateY(-25px) rotateX(4deg) rotateY(-4deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(15px) rotateX(-4deg) rotateY(-5deg); }
+  50% { transform: translateY(8px) rotateX(3deg) rotateY(3deg); }
+  75% { transform: translateY(20px) rotateX(-5deg) rotateY(4deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes tilt-hover {
+  0%, 100% { transform: perspective(800px) rotateY(0deg) rotateX(0deg); }
+  50% { transform: perspective(800px) rotateY(2deg) rotateX(1deg); }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.gradient-text {
+  background: var(--gradient-primary);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s var(--transition-normal) both;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* Staggered delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}

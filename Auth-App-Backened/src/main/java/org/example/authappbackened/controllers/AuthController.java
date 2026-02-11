@@ -131,7 +131,7 @@ public class AuthController {
             log.error("Refresh token not found in database for JWT ID: {}", jwtId);
             return new BadCredentialsException("Refresh token is invalid");
         });
-        if (storedRefreshToken.getUser().getId() != userId) {
+        if (!storedRefreshToken.getUser().getId().equals(userId)) {
             log.error("Refresh token user ID does not match for JWT ID: {}", jwtId);
             throw new BadCredentialsException("Refresh token is invalid");
         }
@@ -191,7 +191,7 @@ public class AuthController {
         }
 
         String authHeader = request.getHeader("Authorization");
-        if (authHeader != null && authHeader.regionMatches(true, 0, "Bearer ", 0, 4)) {
+        if (authHeader != null && authHeader.regionMatches(true, 0, "Bearer ", 0, 7)) {
             String token = authHeader.substring(7).trim();
             if (!token.isEmpty()) {
                 try {

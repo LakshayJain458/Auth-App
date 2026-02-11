@@ -1,0 +1,112 @@
+.input-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 16px 18px;
+    padding-top: 22px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-normal);
+}
+
+.input-field--has-icon {
+    padding-left: 46px;
+}
+
+.input-field:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px var(--input-focus-glow);
+    background: var(--surface);
+}
+
+/* Floating label */
+.input-label {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition:
+        top var(--transition-fast),
+        font-size var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.input-label--has-icon {
+    left: 46px;
+}
+
+.input-label--active,
+.input-field:focus~.input-label,
+.input-field:not(:placeholder-shown)~.input-label {
+    top: 10px;
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Focus underline animation */
+.input-focus-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    transition: width var(--transition-fast), left var(--transition-fast);
+}
+
+.input-focus-line--active {
+    width: 100%;
+    left: 0;
+}
+
+/* Icon */
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    transition: color var(--transition-fast);
+    z-index: 1;
+}
+
+.input-field:focus~.input-icon,
+.input-group:focus-within .input-icon {
+    color: var(--primary);
+}
+
+/* Error state */
+.input-group--error .input-field {
+    border-color: var(--error);
+}
+
+.input-group--error .input-label {
+    color: var(--error);
+}
+
+.input-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--error);
+    font-weight: 500;
+}

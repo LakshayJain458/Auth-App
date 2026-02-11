@@ -1,5 +1,6 @@
 package org.example.authappbackened.exceptions;
 
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.example.authappbackened.entities.enums.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,21 @@ public class GlobalExceptionHandler {
 
         final ErrorResponse errorResponse = new ErrorResponse(
                 ex.getMessage(),
+                HttpStatus.UNAUTHORIZED,
+                HttpStatus.UNAUTHORIZED.value());
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<ErrorResponse> handleJwtException(
+            final JwtException ex,
+            final WebRequest request) {
+
+        log.warn("JWT token error: {} | Request: {}", ex.getMessage(), request.getDescription(false));
+
+        final ErrorResponse errorResponse = new ErrorResponse(
+                "Authentication token error: " + ex.getMessage(),
                 HttpStatus.UNAUTHORIZED,
                 HttpStatus.UNAUTHORIZED.value());
 

@@ -122,7 +122,7 @@ public class JwtService {
                     .parseSignedClaims(token);
         } catch (JwtException e) {
             log.error("Failed to parse JWT token: {}", e.getMessage());
-            throw new RuntimeException("Invalid JWT token", e);
+            throw e;
         }
     }
 

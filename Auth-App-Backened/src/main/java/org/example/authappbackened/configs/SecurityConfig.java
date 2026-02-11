@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.authappbackened.entities.enums.ErrorResponse;
 import org.example.authappbackened.jwt.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class SecurityConfig {
 
     private final AuthenticationSuccessHandler successHandler;
 
+    @Value("${app.frontend.url:http://localhost:5173}")
+    private String frontendUrl;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         log.info("Configuring BCryptPasswordEncoder");
@@ -55,7 +59,10 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(successHandler)
-                        .failureHandler(null)
+                        .failureHandler((request, response1, exception) -> {
+                            log.warn("OAuth2 authentication failed: {}", exception.getMessage());
+                            response1.sendRedirect(frontendUrl + "/login?error=oauth_failed");
+                        })
                 )
                 .logout(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ex ->

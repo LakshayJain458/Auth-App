@@ -1,0 +1,165 @@
+.floating-shapes {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    perspective: 1200px;
+}
+
+/* ---------- shared ---------- */
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+}
+
+/* ---------- Sphere variants ---------- */
+.shape--sphere {
+    border-radius: 50%;
+}
+
+.shape--1 {
+    width: 280px;
+    height: 280px;
+    top: -60px;
+    left: -80px;
+    background: radial-gradient(circle at 35% 35%,
+            hsla(var(--primary-hue), 70%, 65%, 0.35),
+            hsla(var(--primary-hue), 70%, 45%, 0.08));
+    filter: blur(2px);
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape--3 {
+    width: 200px;
+    height: 200px;
+    bottom: 60px;
+    right: -40px;
+    background: radial-gradient(circle at 40% 40%,
+            hsla(330, 70%, 65%, 0.3),
+            hsla(330, 70%, 45%, 0.06));
+    filter: blur(1px);
+    animation: float-reverse 10s ease-in-out infinite;
+}
+
+.shape--5 {
+    width: 140px;
+    height: 140px;
+    bottom: 180px;
+    left: 60px;
+    background: radial-gradient(circle at 40% 40%,
+            hsla(200, 70%, 65%, 0.25),
+            hsla(200, 70%, 45%, 0.05));
+    filter: blur(1px);
+    animation: float 12s ease-in-out infinite 2s;
+}
+
+/* ---------- Cube ---------- */
+.shape--cube {
+    width: 100px;
+    height: 100px;
+    top: 80px;
+    right: 120px;
+    border-radius: 0;
+    transform-style: preserve-3d;
+    animation: float 9s ease-in-out infinite 1s;
+}
+
+.cube-face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 1.5px solid hsla(var(--primary-hue), 60%, 65%, 0.2);
+    background: hsla(var(--primary-hue), 60%, 65%, 0.06);
+    border-radius: 8px;
+}
+
+.cube-face--front {
+    transform: translateZ(50px);
+}
+
+.cube-face--back {
+    transform: rotateY(180deg) translateZ(50px);
+}
+
+.cube-face--left {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.cube-face--right {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.cube-face--top {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.cube-face--bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+/* ---------- Ring ---------- */
+.shape--ring {
+    width: 160px;
+    height: 160px;
+    top: 55%;
+    left: 8%;
+    background: transparent;
+    border: 2.5px solid hsla(var(--primary-hue), 50%, 60%, 0.18);
+    animation: float-reverse 11s ease-in-out infinite 0.5s;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .shape--1 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .shape--3 {
+        width: 130px;
+        height: 130px;
+    }
+
+    .shape--cube {
+        width: 70px;
+        height: 70px;
+        top: 40px;
+        right: 40px;
+    }
+
+    .cube-face {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cube-face--front {
+        transform: translateZ(35px);
+    }
+
+    .cube-face--back {
+        transform: rotateY(180deg) translateZ(35px);
+    }
+
+    .cube-face--left {
+        transform: rotateY(-90deg) translateZ(35px);
+    }
+
+    .cube-face--right {
+        transform: rotateY(90deg) translateZ(35px);
+    }
+
+    .cube-face--top {
+        transform: rotateX(90deg) translateZ(35px);
+    }
+
+    .cube-face--bottom {
+        transform: rotateX(-90deg) translateZ(35px);
+    }
+
+    .shape--ring {
+        width: 100px;
+        height: 100px;
+    }
+}

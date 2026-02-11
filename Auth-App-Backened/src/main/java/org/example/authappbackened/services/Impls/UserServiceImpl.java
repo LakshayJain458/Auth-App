@@ -173,6 +173,9 @@ public class UserServiceImpl implements UserService {
         if (userDto.getUsername() != null && !userDto.getUsername().isBlank()) {
             existingUser.setUsername(userDto.getUsername());
         }
+        if (userDto.getEmail() != null && !userDto.getEmail().isBlank()) {
+            existingUser.setEmail(userDto.getEmail());
+        }
         if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
             existingUser.setPassword(userDto.getPassword());
         }
@@ -182,7 +185,6 @@ public class UserServiceImpl implements UserService {
         if (userDto.getProvider() != null) {
             existingUser.setProvider(userDto.getProvider());
         }
-        existingUser.setEnabled(userDto.isEnabled());
     }
 }
 
