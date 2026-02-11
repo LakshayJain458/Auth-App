@@ -46,6 +46,7 @@ public class User implements UserDetails {
     @Column(name = "image", length = 1024)
     private String image;
 
+    @Builder.Default
     @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
 

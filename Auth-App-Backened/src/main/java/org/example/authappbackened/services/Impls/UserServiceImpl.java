@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         validateEmailUniqueness(userDto.getEmail());
 
         final User user = mapToUser(userDto);
+        user.setEnabled(true);
         setDefaultProviderIfNeeded(user, userDto.getProvider());
 
         final User savedUser = userRepo.save(user);

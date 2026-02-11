@@ -400,16 +400,6 @@ Auth-App/
 
 ---
 
-## 🎨 Screenshots
-
-> _Add screenshots of your app here._
-
-| Home Page | Login | Dashboard |
-|:---------:|:-----:|:---------:|
-| ![Home](https://via.placeholder.com/300x200?text=Home+Page) | ![Login](https://via.placeholder.com/300x200?text=Login+Page) | ![Dashboard](https://via.placeholder.com/300x200?text=Dashboard) |
-
----
-
 ## 🧪 Running Tests
 
 ```bash
